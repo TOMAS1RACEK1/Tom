@@ -1,0 +1,50 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Přihlášení";
+}
+
+
+
+<div class="text-center">
+    <h1 class="display-4">Pracovní výkazy</h1>
+    <h2>Dodržujte bezpečnost práce!</h2>
+    <h2>Dbejte zvýšené opatrnosti na kolegy!</h2>
+    <h2 class="mb-5">Všichni chceme zlepšovat naše výkony!</h2>
+    @*<h6><a class="btn btn-lg btn-primary" asp-page="Login"><i class="bi me-2"></i>ZAČÍT</a></h6>*@
+</div>
+
+
+
+<div class="text-center">
+    <form method="post">
+        <div class="form-group">
+            <h2><label for="Nick">ZADEJTE SVŮJ NICK:</label></h2>
+            <input asp-for="Nick" class="form-control w-25 mx-auto" placeholder=" " required />
+            <span asp-validation-for="Nick" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-lg btn-success">Přihlásit se</button>
+    </form>
+</div>
+
+<div class="my-5"></div>
+
+<div class="d-flex justify-content-center row gx-4 gx-lg-5">
+    <div class="col-md-8 mb-lg-3">
+        <div class="card mh-100">
+            <div class="card-body bg-success">
+                <h2 class="card-title text-center">Aplikace ASP.NET</h2>
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li class="card-title text-center">Správa pracovních výkazů.</li>
+                    <li class="card-title text-center">K dispozici nicky : tora, blbá, pako.</li>
+                    <li class="card-title text-center">Použít k přihlášení.</li>
+                    <li class="card-title text-center">Vyzkoušet.</li>
+                    <li class="card-title text-center">Footer s odkazy.</li>
+                    <li class="card-title text-center">JS, Bootstrap, RazorPage, Sqllite.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+

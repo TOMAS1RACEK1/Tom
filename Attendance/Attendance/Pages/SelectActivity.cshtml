@@ -1,0 +1,27 @@
+﻿@page "{userId:int}"
+@model SelectActivityModel
+@{
+    ViewData["Title"] = "Výběr činnosti";
+}
+
+<h1>@Model.Greeting, @Model.UserFirstName !</h1>
+
+<h2>Vyber činnost</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="form-group">
+        <label for="SelectedActivityId">Dostupné činnosti:</label>
+        <select asp-for="SelectedActivityId" asp-items="Model.ActivityOptions" class="form-control">
+            <option value="">-- Vyberte činnost --</option>
+        </select>
+        <div asp-validation-summary="All" class="text-danger"></div>
+    </div>
+
+    <br />
+    <button type="submit" class="btn btn-lg btn-success">Zahájit činnost</button>
+</form>
+
+
+<partial name="_ValidationScriptsPartial" />

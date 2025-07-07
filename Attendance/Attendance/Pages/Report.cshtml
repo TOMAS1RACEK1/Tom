@@ -1,0 +1,134 @@
+﻿@page
+@model Attendance.Pages.ReportModel
+@{
+    ViewData["Title"] = "Report";
+}
+
+<h2 class="mb-4">Report uživatele</h2>
+
+<form method="post" class="mb-4">
+    <div class="input-group mb-3 w-50 mx-auto">
+        <input asp-for="Nick" class="form-control" placeholder="Zadejte přezdívku uživatele" />
+        <button type="submit" class="btn btn-primary">Vyhledat</button>
+    </div>
+    <span asp-validation-for="Nick" class="text-danger"></span>
+</form>
+
+@if (!string.IsNullOrEmpty(Model.UserFullName))
+{
+    <h4 class="mb-3">Výsledky pro: <strong>@Model.UserFullName</strong></h4>
+
+    <form method="get" class="row g-3 mb-4">
+        <input type="hidden" name="userId" value="@Model.UserId" />
+        <div class="col-md-4">
+            <select name="reportType" class="form-select">
+                <option value="daily" selected="@("daily" == Model.ReportType)">Denní report</option>
+                <option value="monthly" selected="@("monthly" == Model.ReportType)">Měsíční report</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <input type="date" name="reportDate" class="form-control" value="@Model.ReportDate.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-success">Zobrazit</button>
+        </div>
+    </form>
+
+
+
+
+
+
+
+    <div id="print-area">
+
+        <h2>Výsledky pro: @Model.UserFullName</h2>
+
+        @if (Model.Logs != null && Model.Logs.Count > 0)
+        {
+
+
+            <table class="table table-striped table-bordered custom-border">
+                <thead>
+                    <tr>
+                        <th>Činnost</th>
+                        <th>Začátek</th>
+                        <th>Konec</th>
+                        <th>Trvání</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var log in Model.Logs)
+                    {
+                        <tr>
+                            <td>@log.ActivityName</td>
+                            <td>@log.StartTime.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@log.EndTime.ToString("dd.MM.yyyy HH:mm")</td>
+                            <td>@log.DurationText</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        }
+        else
+        {
+            <p class="text-muted">Žádné záznamy pro daný den nebo měsíc.</p>
+        }
+
+    </div>
+
+    @*<button onclick="printReport()" class="btn btn-secondary">Stáhnout PDF</button>*@
+
+    <div class="d-flex justify-content-end mt-3">
+            <button onclick="printReport()" class="btn btn-danger">
+               
+                Stáhnout PDF
+            </button>
+        </div>
+
+    @*<div class="d-flex justify-content-end mb-3">
+            <button onclick="window.print()" class="btn btn-secondary">
+                🖨️ Stáhnout PDF
+            </button>
+        </div>*@
+
+}
+
+<script>
+    function printReport() {
+        const printContents = document.getElementById('print-area').innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+        location.reload(); // znovunačte JS a CSS
+    }
+</script>
+
+
+
+@*<style>
+        @@media print {
+            button {
+                display: none;
+            }
+
+            body {
+                font-family: sans-serif;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                border: 1px solid #000;
+                padding: 6px;
+            }
+        }
+    </style>*@
+

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Attendance</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Attendance.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="wrapper d-flex flex-column min-vh-100">
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-grey bg-secondary border-bottom box-shadow mb-3 fixed-top">
+                <div class="container">
+                    @*<a class="navbar-brand" asp-area="" asp-page="/Index">Attendance</a>*@
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark btn-lg btn-primary mx-2 my-1" asp-area="" asp-page="/Index">START</a>
+                            </li>
+                            @*<li class="nav-item">
+                                <a class="nav-link text-dark btn-lg btn-success mx-2 my-1" asp-area="" asp-page="/Login">START</a>
+                            </li>*@
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark btn-lg btn-success mx-2 my-1" asp-area="" asp-page="/ActiveUsers">RUN</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark btn-lg btn-success mx-2 my-1" asp-area="" asp-page="/Report">STATS</a>
+                            </li>
+
+                            @*<li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/SelectActivity">Výběr činnosti</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-page="/ActivityStarted">Zahájení činnosti</a>
+        </li>*@
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="flex-fill container py-4">
+            @RenderBody()
+        </main>
+
+        <footer class="text-center bg-secondary text-black py-3 mt-auto">
+            © 2025 Racik
+            <a href="https://github.com/TOMAS1RACEK1/Tom" target="_blank" class="mx-3">GIT</a>
+            <a href="http://racik.eu/" target="_blank" class="mx-3">WEB</a>
+            <a href="http://racektom.aspfree.cz/" target="_blank" class="mx-3">ASP.NET Aplikace</a>
+            © 2025 Racik
+        </footer>
+    </div>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

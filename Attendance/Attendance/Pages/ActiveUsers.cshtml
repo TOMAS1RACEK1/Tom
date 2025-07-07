@@ -1,0 +1,87 @@
+﻿@page
+@model Attendance.Pages.ActiveUsersModel
+@{
+    ViewData["Title"] = "Aktivní uživatelé";
+}
+
+<h2>Právě aktivní činnosti</h2>
+
+@if (Model.ActiveLogs.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Uživatel</th>
+                <th>Činnost</th>
+                <th>Začátek</th>
+                <th>Uplynulý čas</th>
+                <th>Ukončit</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var log in Model.ActiveLogs)
+            {
+                <tr>
+                    <td>@log.UserName</td>
+                    <td>@log.ActivityName</td>
+                    <td>@log.StartTime.ToString("dd.MM.yyyy HH:mm:ss")</td>
+                    <td id="elapsed-@log.LogId" data-start="@log.StartTime.ToString("yyyy-MM-ddTHH:mm:ss")">
+                    </td>
+                    <td>
+                        <form method="post" asp-page-handler="End" onsubmit="return confirm('Opravdu chcete ukončit činnost?');">
+                            <input type="hidden" name="logId" value="@log.LogId" />
+                            <button type="submit" class="btn btn-danger">Ukončit činnost</button>
+                        </form>
+
+
+                        @*<form method="post" action="/ActiveUsers?handler=End">
+            <input type="hidden" name="logId" value="@log.LogId" />
+            <button type="submit" class="btn btn-danger">Ukončit činnost</button>
+        </form>*@
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Žádný uživatel právě nemá aktivní činnost.</p>
+}
+
+
+<script>
+    function formatDuration(secondsTotal) {
+        const h = Math.floor(secondsTotal / 3600);
+        const m = Math.floor((secondsTotal % 3600) / 60);
+        const s = secondsTotal % 60;
+
+        return `${h} hod ${m} min ${s} s`;
+    }
+
+    function updateTimers() {
+        const elements = document.querySelectorAll("[id^='elapsed-']");
+        const now = new Date();
+
+        elements.forEach(el => {
+            const startStr = el.getAttribute("data-start");
+            const start = new Date(startStr);
+
+            const seconds = Math.floor((now - start) / 1000);
+            el.textContent = formatDuration(seconds);
+        });
+    }
+
+    setInterval(updateTimers, 1000);
+    updateTimers();
+</script>
+
+
+<partial name="_ValidationScriptsPartial" />
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>

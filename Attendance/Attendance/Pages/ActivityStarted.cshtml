@@ -1,0 +1,9 @@
+﻿@page "{logId:int}"
+@model Attendance.Pages.ActivityStartedModel
+@{
+    ViewData["Title"] = "Činnost zahájena";
+}
+<h2>Činnost zahájena</h2>
+
+<p>Uživatel <strong>@Model.Nick</strong> právě zahájil činnost: <strong>@Model.ActivityName</strong></p>
+<p>Začátek: @Model.StartTime.ToString("HH:mm:ss")</p>

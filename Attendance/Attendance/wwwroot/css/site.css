@@ -1,0 +1,106 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    height: 100%; /* Zajistí, že html a body zaberou celou výšku viewportu */
+    margin: 0; /* Odstraní výchozí okraje */
+    padding: 0; /* Odstraní výchozí odsazení */
+}
+
+main {
+    flex: 1; /* hlavní obsah roztáhne zbytek výšky */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body {
+    padding-top: 70px; /* pøizpùsob výšce tvého navbaru */
+    margin-bottom: 60px;
+    display: flex; /* Aktivuje Flexbox */
+    flex-direction: column; /* Položky se skládají pod sebe */
+    padding-top: 4rem; /* nebo podle výšky navbaru */
+    background-color: #49AED6; /* Svìtle šedé pozadí */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+@media print {
+    body {
+        margin: 1cm;
+        font-size: 12pt;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #000;
+        padding: 6px;
+        text-align: left;
+    }
+
+    button {
+        display: none; /* skryje tlaèítko */
+    }
+}
+
+
+
+
+/*body {
+    margin: 0;
+    padding: 0;
+    background-image: url('/images/joshua-aragon-BMnhuwFYr7w-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100%;
+}*/
+
+h1{
+        font-size: 2.5rem;
+    font-weight: 700;
+    color: #333; /* Tmavì šedá barva textu */
+    margin-bottom: 1rem; /* Odsazení pod nadpisem */
+}
+h2 {
+
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333; /* Tmavì šedá barva textu */
+    margin-bottom: 1rem; /* Odsazení pod nadpisem */
+}

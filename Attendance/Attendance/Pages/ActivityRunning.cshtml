@@ -1,0 +1,54 @@
+﻿@page  "{logId:int}"
+@model ActivityRunningModel
+@{
+    ViewData["Title"] = "Probíhá činnost";
+}
+
+<h2>Probíhá: @Model.ActivityName</h2>
+<p>Začátek: <span id="start">@Model.StartTime.ToString("HH:mm:ss")</span></p>
+<p>Uběhlý čas: <span id="elapsed">0 s</span></p>
+
+<p id="liveDuration">Uběhlý čas: počítám...</p>
+
+<form method="post">
+    <input type="hidden" name="LogId" value="@Model.LogId" />
+    <button type="submit" asp-page-handler="Finish" class="btn btn-danger">Ukončit činnost</button>
+</form>
+
+@*<script>
+    const start = new Date('@Model.StartTime.ToString("yyyy-MM-ddTHH:mm:ss", System.Globalization.CultureInfo.InvariantCulture)');
+    const display = document.getElementById('liveDuration');
+
+    setInterval(() => {
+        const now = new Date();
+        const diff = new Date(now - start);
+        const hours = String(diff.getUTCHours()).padStart(2, '0');
+        const mins = String(diff.getUTCMinutes()).padStart(2, '0');
+        const secs = String(diff.getUTCSeconds()).padStart(2, '0');
+        display.textContent = `Uběhlý čas: ${hours}:${mins}:${secs}`;
+    }, 1000);
+</script>*@
+
+
+<script>
+    const start = new Date("@Model.StartTime.ToString("yyyy-MM-ddTHH:mm:ss")");
+
+    function updateElapsed() {
+        const now = new Date();
+        const diff = new Date(now - start);
+
+        const hours = diff.getUTCHours();
+        const minutes = diff.getUTCMinutes();
+        const seconds = diff.getUTCSeconds();
+
+        let text = "";
+        if (hours > 0) text += `${hours} hod `;
+        if (minutes > 0 || hours > 0) text += `${minutes} min `;
+        text += `${seconds} s`;
+
+        document.getElementById("elapsed").textContent = text;
+    }
+
+    setInterval(updateElapsed, 1000); // aktualizace každou sekundu
+    updateElapsed(); // první spuštění
+</script>
